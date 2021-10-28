@@ -1,44 +1,63 @@
 package com.example.demo;
 
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.notification.Notification;
+import com.example.demo.client.BackendClient;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.PWA;
+import lombok.Getter;
 
-/**
- * The main view contains a button and a click listener.
- */
+import java.awt.*;
+
 @Route("")
-@PWA(name = "Project Base for Vaadin", shortName = "Project Base")
-@CssImport("./styles/shared-styles.css")
-@CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
+@Getter
+@PageTitle("First-Bank-Application")
 public class MainView extends VerticalLayout {
 
-    public MainView() {
-        // Use TextField for standard text input
-        TextField textField = new TextField("Your name");
+    BackendClient backendClient;
+    TextField welcomeCustomer = new TextField();
+    TextField labelField1 = new TextField();
+    TextField labelField2 = new TextField();
+    TextField labelField3 = new TextField();
+    Button transactionButton = new Button();
+    HorizontalLayout layout1 = new HorizontalLayout (labelField1,labelField2,labelField3);
+    H2 header = new H2("Welcome " + backendClient.getCustomerByName("Marek"));
 
-        // Button click listeners can be defined as lambda expressions
-        GreetService greetService = new GreetService();
-        Button button = new Button("Say hello",
-                e -> Notification.show(greetService.greet(textField.getValue())));
+    public MainView(BackendClient backendClient) {
+        this.backendClient = backendClient;
 
-        // Theme variants give you predefined extra styles for components.
-        // Example: Primary button is more prominent look.
-        button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        add(welcomeCustomer);
+        add(labelField1);
+        add(labelField2);
+        add(labelField3);
+        //Button transactionButton = new Button("ALL OPERATIONS", event -> {})
+        add(welcomeCustomer);
+        add(welcomeCustomer);
 
-        // You can specify keyboard shortcuts for buttons.
-        // Example: Pressing enter in this view clicks the Button.
-        button.addClickShortcut(Key.ENTER);
 
-        // Use custom CSS classes to apply styling. This is defined in shared-styles.css.
-        addClassName("centered-content");
-
-        add(textField, button);
+        /*welcomeCustomer.setLabel("Welcome ");
+        welcomeCustomer.setValue(backendClient.getCustomerByName("Marek"));
+        add(welcomeCustomer);
+        welcomeCustomer.setReadOnly(true);*/
+        //labelField1.setLabel("");
+        //add(labelField1);
+        //add(layout1); // po lini 21 trzeba dodac do konstruktora
+        //labelField.setValue(new BigDecimal(0));
     }
 }
+/*
+    public MainView(BackendClient backendClient) {
+        this.backendClient = backendClient;
+        labelField.setLabel("stan konta");
+        //add(labelField);
+        labelField.setReadOnly(true);
+        labelField.setValue(backendClient.getCustomerByName("Marek"));
+
+        labelField1.setLabel("label");
+        //add(labelField1);
+        add(layout1);
+    }
+}
+*/
