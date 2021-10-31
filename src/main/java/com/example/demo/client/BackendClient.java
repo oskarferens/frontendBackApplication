@@ -31,4 +31,8 @@ public class BackendClient {
                         "/account/getBalance/" + balance ,BigDecimal.class, BigDecimal.class));
         return balanceResponse.orElse(new BigDecimal(0));
     }
+
+    public void makeTransfer() {
+
+    }
 }
