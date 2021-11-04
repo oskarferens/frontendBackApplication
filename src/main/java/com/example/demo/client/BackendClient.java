@@ -25,7 +25,7 @@ public class BackendClient {
         return response.orElse(new String());
     }
 
-    public BigDecimal getBalance(BigDecimal balance) {
+    public BigDecimal getBalanceByAccountId(BigDecimal balance) {
         Optional<BigDecimal> balanceResponse = Optional.ofNullable(restTemplate.getForObject(
                 connectionConfig.getBackApiEndpoint() +
                         "/account/getBalance/" + balance ,BigDecimal.class, BigDecimal.class));
@@ -35,4 +35,18 @@ public class BackendClient {
     public void makeTransfer() {
 
     }
+
+    public void getOperationHistory() {
+
+    }
+
+    public void getBitcoinValue () {
+
+    }
+
+    public void getExchangeValues () {
+
+    }
+
+
 }
